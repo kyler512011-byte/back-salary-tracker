@@ -1,0 +1,52 @@
+HTML
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Outstanding Balance
+  </title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #111;
+      color: #fff;
+    }
+    .amount {
+      font-size: 60px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+    .rate {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+<h1> Outstanding Balance</h1>
+<div class="amount" id="counter">$0.00</div>
+<div class="rate">Accruing at $0.0284186 per minute</div>
+
+<script>
+  const startingAmount = 99578.96;
+  const perMinuteIncrease = 0.0284186;
+
+  const startTime = new Date("2026-03-01T00:00:00");
+
+  function updateCounter () {
+    const now = new Date ();
+    const minutesElapsed = (now - startTime) / 60000;
+    const total = startingAmount + (minutesElapsed * perMinuteIncrease);
+
+    document.getElementbyId("counter").innerText = 
+      "$" + total.toFixed(2);
+  }
+  setInterval(updateCounter, 1000);
+  updateCounter();
+</script>
+</body>
+</html>
