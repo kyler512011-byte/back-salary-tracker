@@ -26,20 +26,20 @@
 </head>
 <body>
 <h1> Outstanding Balance</h1>
-<div class="amount" id="counter">$99,578.9600</div>
-<div class="rate">Accruing at $0.0284186 per minute</div>
+<div class="amount" id="counter">$0.00</div>
+<div class="rate">Accruing at 15% compounding</div>
 
 <script>
-  const startingAmount = 99578.96;
-  const perSecondIncrease = 0.0284186 / 60;
+  const startingAmount = 30000.00;
+  const annualRate = 0.15;
 
-  const startTime = new Date("2026-03-20T00:00:00").getTime();
+  const startTime = new Date("2017-06-01T00:00:00").getTime();
 
   function updateCounter() {
     const now = new Date().getTime();
-    const secondsElapsed = (now - startTime) / 1000;
-    const safeSeconds = Math.max(0, secondsElapsed);
-    const total = startingAmount + (safeSeconds * perSecondIncrease);
+    const yearsElapsed = (now - startTime) / (1000 * 60 * 60 * 24 * 365);
+    const safeYears = Math.max(0, yearsElapsed);
+    const total = startingAmount * Math.pow(1 + annualRate, safeYears);
 
     document.getElementById("counter").innerText = 
       "$" + total.toFixed(4);
