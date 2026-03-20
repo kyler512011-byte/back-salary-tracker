@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>
+    Outstanding Balance of Back Salary
+  </title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #111;
+      color: #fff;
+    }
+    .amount {
+      font-size: 60px;
+      font-weight: bold;
+      color: #00ffcc;
+    }
+    .rate {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+<h1> Outstanding Balance of Back Salary and Interest</h1>
+<div class="amount" id="counter">$0.00</div>
+<div class="rate">Accruing with the promised compounding interest at 12% annually</div>
+
+<script>
+  const startingAmount = 35000.00;
+  const annualRate = 0.12;
+
+  const startTime = new Date("2017-05-01T00:00:00").getTime();
+
+  function updateCounter() {
+    const now = new Date().getTime();
+    const yearsElapsed = (now - startTime) / (1000 * 60 * 60 * 24 * 365);
+    const safeYears = Math.max(0, yearsElapsed);
+    const total = startingAmount * Math.pow(1 + annualRate, safeYears);
+
+    document.getElementById("counter").innerText = 
+      "$" + total.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 4
+      });
+  }
+  setInterval(updateCounter, 1000);
+  updateCounter();
+</script>
+</body>
